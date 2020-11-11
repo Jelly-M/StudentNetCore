@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Student>
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";  //有viewstart 控制布局
+    ViewBag.Title = "学生列表";
+}
+
+
+<table>
+    <tr>
+        <td>ID</td>
+        <td>姓名</td>
+        <td>邮箱</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><div>ID: @item.Id</div></td>
+            <td><div>姓名：@item.Name</div></td>
+            <td><div>邮箱：@item.Email</div></td>
+        </tr>
+    }
+</table>
+
