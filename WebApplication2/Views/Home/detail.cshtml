@@ -1,13 +1,16 @@
 ﻿
 @model StudentViewModel
-@{ 
+@{
     //Layout = "~/Views/Shared/_Layout.cshtml";  //有viewstart 控制布局
     ViewBag.Title = "学生详情页";
 }
 <div>@Model.Title</div>
-    <div>ID: @Model.student.Id</div>
-    <div>姓名：@Model.student.Name</div>
-    <div>邮箱：@Model.student.Email</div>
+<div>ID: @Model.student.Id</div>
+<div>姓名：@Model.student.Name</div>
+<div>邮箱：@Model.student.Email</div>
+
+
+<div><img src="" asp-append-version="true" /></div> @*服务器图片缓存，会自动在图片上加一个哈希值*@
 @section JavaScript
 {
     <script src="~/js/JavaScript.js"></script>
