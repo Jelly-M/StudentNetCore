@@ -19,7 +19,7 @@ namespace WebApplication2
             services.AddMvc();
             //
             //services.AddMvcCore();  只包含了mvc的核心功能，addmvc 包含了依赖mvc core 以及常用的第三方服务和方法
-            services.AddScoped<IStudentRepository, StudentReopsitory>(); //绑定依赖注入服务
+            services.AddSingleton<IStudentRepository, StudentReopsitory>(); //绑定依赖注入服务
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

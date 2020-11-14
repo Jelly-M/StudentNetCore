@@ -25,7 +25,7 @@ namespace WebApplication2.Controllers
         }
         public IActionResult detail(int id)
         {
-            var model = _studentRepository.GetStudent(1);
+            var model = _studentRepository.GetStudent(id);
             var viewModel = new StudentViewModel()
             {
                 Title = "学生详情页",
@@ -34,8 +34,22 @@ namespace WebApplication2.Controllers
             };
             return View(viewModel);
         }
-
+        [HttpGet]
         public IActionResult Create()
-        { return View(); }
+        {
+            return View();
+        }
+        public IActionResult Create(Student student)
+        {
+            //模型验证
+            if (ModelState.IsValid)
+            {
+
+                Student newStudnet = _studentRepository.Add(student);
+                return RedirectToAction("detail", new { id = newStudnet.Id });
+            }
+            return View();
+        }
     }
+
 }
