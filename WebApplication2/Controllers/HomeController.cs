@@ -20,12 +20,12 @@ namespace WebApplication2.Controllers
         {
             // return _studentRepository.GetStudent(1).Email;
             var listStudent = _studentRepository.GetAllStudents();
-            
+
             return View(listStudent);
         }
         public IActionResult detail(int id)
         {
-           var model= _studentRepository.GetStudent(1);
+            var model = _studentRepository.GetStudent(1);
             var viewModel = new StudentViewModel()
             {
                 Title = "学生详情页",
@@ -34,5 +34,8 @@ namespace WebApplication2.Controllers
             };
             return View(viewModel);
         }
+
+        public IActionResult Create()
+        { return View(); }
     }
 }
