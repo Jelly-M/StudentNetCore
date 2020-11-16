@@ -4,7 +4,6 @@
     ViewBag.Title = "学生列表";
 }
 
-
 <table class="table">
     <tr class="">
         <td>ID</td>
@@ -18,12 +17,13 @@
             <td><div>ID: @item.Id</div></td>
             <td><div>姓名：@item.Name</div></td>
             <td><div>邮箱：@item.Email</div></td>
-            <td><div><a class="m-1 btn btn-primary" asp-controller="home" asp-action="detail" asp-route-id="@item.Id">查看</a>
-                <a  class="m-1 btn btn-warning"asp-controller="home" asp-action="edit" asp-route-id="@item.Id">编辑</a>
-                <a class="m-1 btn btn-danger"asp-controller="home" asp-action="delete" asp-route-id="@item.Id">删除</a>
-                </div></td>
+            <td>
+                <div>
+                    <a class="m-1 btn btn-primary" asp-controller="home" asp-action="detail" asp-route-id="@item.Id">查看</a>
+                    <a class="m-1 btn btn-warning" asp-controller="home" asp-action="edit" asp-route-id="@item.Id">编辑</a>
+                    <a class="m-1 btn btn-danger" asp-controller="home" asp-action="delete" asp-route-id="@item.Id">删除</a>
+                </div>
+            </td>
         </tr>
     }
-
 </table>
-
