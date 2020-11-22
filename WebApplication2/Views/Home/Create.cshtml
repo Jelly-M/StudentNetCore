@@ -1,4 +1,5 @@
 ﻿@model Student
+@inject IStudentRepository _studentResponsity 
 @{
     ViewData["Title"] = "Create";
 }
@@ -30,6 +31,7 @@
             <span asp-validation-for="Gread" class="text-danger"></span>
         </div>
     </div>
+    <div>学生总人数：@_studentResponsity.GetAllStudents().Count()</div>
     <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">提交</button>
     </div>

@@ -10,11 +10,14 @@ namespace WebApplication2.Models
         public string Name { get; set; }
 
         [Display(Name = "邮箱")]
-        [RegularExpression(@"^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$", ErrorMessage = "邮箱格式不正确"), Required(ErrorMessage = "邮箱必填")]
+        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "邮箱格式不正确"), Required(ErrorMessage = "邮箱必填")]
         public string Email { get; set; }
 
         [Display(Name = "年级")]
         [Required]
         public ClassNameEnum? Gread { get; set; }
+
+        [Display(Name="头像")]
+        public string PhotePath { get; set; }
     }
 }

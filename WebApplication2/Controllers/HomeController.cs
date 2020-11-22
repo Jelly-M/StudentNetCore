@@ -37,14 +37,14 @@ namespace WebApplication2.Controllers
         {
             return View();
         }
-
+        [HttpPost]
         public IActionResult Create(Student student)
         {
             //模型验证
             if (ModelState.IsValid)
             {
                 Student newStudnet = _studentRepository.Add(student);
-                return RedirectToAction("detail", new { id = newStudnet.Id });
+               // return RedirectToAction("detail", new { id = newStudnet.Id });
             }
             return View();
         }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,6 +25,16 @@ namespace WebApplication2.Models
             return student;
         }
 
+        public Student Delete(int id)
+        {
+            Student student = students.FirstOrDefault(x => x.Id == id);
+            if(student!=null)
+            {
+                students.Remove(student);
+            }
+            return student;
+        }
+
         public IEnumerable<Student> GetAllStudents()
         {
             return students;
@@ -33,6 +43,17 @@ namespace WebApplication2.Models
         public Student GetStudent(int id)
         {
             return students.FirstOrDefault(x=>x.Id==id);
+        }
+
+        public Student Update(Student student)
+        {
+            Student _student = students.FirstOrDefault(x => x.Id == student.Id);
+            if (_student != null)
+            {
+                _student.Name = student.Name;
+                _student.Email = student.Email;
+            }
+            return student;
         }
     }
 }
