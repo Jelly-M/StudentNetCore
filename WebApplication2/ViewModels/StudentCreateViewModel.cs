@@ -10,7 +10,7 @@ namespace WebApplication2.ViewModels
 {
     public class StudentCreateViewModel
     {
-        public int Id { get; set; }
+        //public int Id { get; set; } //创建学生时不需要ID
 
         [Required(ErrorMessage = "名字必填"), Display(Name = "名字")]
         public string Name { get; set; }

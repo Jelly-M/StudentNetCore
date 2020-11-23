@@ -74,6 +74,30 @@ namespace WebApplication2.Controllers
                return RedirectToAction("detail", new { id = newStudnet.Id });
             }
             return View();
-        } 
+        }
+        [HttpGet]
+        public ViewResult edit(int id)
+        {
+            var student = _studentRepository.GetStudent(id);
+            if (student != null)
+            {
+                StudentEditViewModel studentEditViewModel = new StudentEditViewModel() {
+                    Id = id,
+                    Name=student.Name,
+                    Email=student.Email,
+                    ExistsPath=student.Photo,
+                    Gread=student.Gread
+                
+                };
+                return View(studentEditViewModel);
+            }
+            return View();
+
+        }
+        [HttpPost]
+        public IActionResult edit(StudentEditViewModel studentEditView)
+        {
+
+        }
     }
 }
