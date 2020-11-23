@@ -1,0 +1,63 @@
+﻿@model StudentCreateViewModel
+@inject IStudentRepository _studentResponsity 
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form method="post" asp-controller="home" asp-action="Create" class="mt-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" placeholder="请输入名字" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" placeholder="请输入邮箱" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Gread" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Gread" asp-items="Html.GetEnumSelectList<ClassNameEnum>()" class="custom-select mr-sm-2">
+                <option value="">请选择</option>
+            </select>
+            <span asp-validation-for="Gread" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input asp-for="Photo" type="file" class="custom-file-input form-control" />
+                <laber class="custom-file-label">请选择照片</laber>
+            </div>
+            
+        </div>
+    </div>
+    <div>学生总人数：@_studentResponsity.GetAllStudents().Count()</div>
+    <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">提交</button>
+    </div>
+    @section JavaScript{ 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                debugger
+                $(".custom-file-input").on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    console.log(fileName);
+                    $(this).next(".custom-file-label").html(fileName);
+                });
+            });
+            
+        </script>
+
+    }
+</form>

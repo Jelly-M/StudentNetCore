@@ -1,8 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using WebApplication2.Models;
+using Microsoft.AspNetCore.Http;
 
-namespace WebApplication2.Models
+namespace WebApplication2.ViewModels
 {
-    public class Student
+    public class StudentCreateViewModel
     {
         public int Id { get; set; }
 
@@ -17,7 +23,7 @@ namespace WebApplication2.Models
         [Required]
         public ClassNameEnum? Gread { get; set; }
 
-        [Display(Name="头像")]
-        public string Photo{ get; set; }
+        [Display(Name = "图片")]
+        public IFormFile Photo { get; set; }
     }
 }
