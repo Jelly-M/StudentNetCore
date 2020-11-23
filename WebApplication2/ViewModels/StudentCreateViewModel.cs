@@ -24,6 +24,6 @@ namespace WebApplication2.ViewModels
         public ClassNameEnum? Gread { get; set; }
 
         [Display(Name = "图片")]
-        public IFormFile Photo { get; set; }
+        public List<IFormFile> Photos { get; set; }
     }
 }

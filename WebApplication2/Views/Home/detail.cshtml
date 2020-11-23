@@ -3,12 +3,13 @@
 @{
     //Layout = "~/Views/Shared/_Layout.cshtml";  //有viewstart 控制布局
     ViewBag.Title = "学生详情页";
+   var photo= "~/img/"+Model.student.Photo;
 }
 <div>@Model.Title</div>
 <div>ID: @Model.student.Id</div>
 <div>姓名：@Model.student.Name</div>
 <div>邮箱：@Model.student.Email</div>
-
+<div ><img src="@photo" asp-append-version="true" style="width: 250px; height: 300px"/></div>
 <div><a asp-action="index" asp-controller="home" class="btn btn-primary">返回</a>
     <a class="m-1 btn btn-warning" asp-controller="home" asp-action="edit" >编辑</a>
     <a class="m-1 btn btn-danger" asp-controller="home" asp-action="edit">删除</a>

@@ -49,14 +49,20 @@ namespace WebApplication2.Controllers
             if (ModelState.IsValid)
             {
                 string uniqueFileName = string.Empty;
-                if(model.Photo!=null)
+                if(model.Photos!=null&&model.Photos.Count>0)
                 {
                     //图片上传的路径
                     string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "img");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    string filePath = Path.Combine(uploadFolder, uniqueFileName);
-                    //将文件拷贝到文件价中去
-                    model.Photo.CopyTo(new FileStream(filePath,FileMode.Create));
+                    foreach (var Photo in model.Photos)
+                    {
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
+                        string filePath = Path.Combine(uploadFolder, uniqueFileName);
+                        //将文件拷贝到文件夹中去
+                        Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
+
+                   
+                   
                 }
                 Student student = new Student() { 
                     Name=model.Name,
