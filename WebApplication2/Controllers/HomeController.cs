@@ -68,6 +68,6 @@ namespace WebApplication2.Controllers
                return RedirectToAction("detail", new { id = newStudnet.Id });
             }
             return View();
-        }
+        } 
     }
 }
