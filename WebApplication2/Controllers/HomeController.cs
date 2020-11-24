@@ -97,7 +97,19 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult edit(StudentEditViewModel studentEditView)
         {
-
+            if(ModelState.IsValid)
+            {
+                //
+                Student student = new Student() { 
+                    Id=studentEditView.Id,
+                    Name=studentEditView.Name,
+                    Gread=studentEditView.Gread,
+                    Email=studentEditView.Email,
+                    Photo=studentEditView.ExistsPath
+                };
+                _studentRepository.Update(student);
+            }
+            return View("Index");
         }
     }
 }
