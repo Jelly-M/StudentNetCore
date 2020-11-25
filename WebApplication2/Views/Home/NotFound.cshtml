@@ -1,0 +1,11 @@
+﻿@model int;
+@{ 
+    ViewBag.Title = "404";
+
+}
+<div class="alert alert-danger mt-1 mb-1" >
+    <div>404</div>
+    <hr />
+    <h5>查询不到学生为@(Model)</h5>
+</div>
+<a asp-action="index" asp-controller="home" class="btn btn-outline-success" style="width:auto">返回学生信息</a>

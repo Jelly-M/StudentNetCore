@@ -11,7 +11,7 @@
 <div>邮箱：@Model.student.Email</div>
 <div ><img src="@photo" asp-append-version="true" style="width: 250px; height: 300px"/></div>
 <div><a asp-action="index" asp-controller="home" class="btn btn-primary">返回</a>
-    <a class="m-1 btn btn-warning" asp-controller="home" asp-action="edit" >编辑</a>
+    <a class="m-1 btn btn-warning" asp-controller="home" asp-action="edit" asp-route-id="@Model.student.Id" >编辑</a>
     <a class="m-1 btn btn-danger" asp-controller="home" asp-action="edit">删除</a>
     </div>
 

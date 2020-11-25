@@ -29,6 +29,11 @@ namespace WebApplication2.Controllers
         public IActionResult detail(int id)
         {
             var model = _studentRepository.GetStudent(id);
+            if(model==null)
+            {
+                Response.StatusCode = 404;
+                return View("NotFound",id);
+            }
             var viewModel = new StudentViewModel()
             {
                 Title = "学生详情页",
@@ -99,17 +104,51 @@ namespace WebApplication2.Controllers
         {
             if(ModelState.IsValid)
             {
-                //
-                Student student = new Student() { 
-                    Id=studentEditView.Id,
-                    Name=studentEditView.Name,
-                    Gread=studentEditView.Gread,
-                    Email=studentEditView.Email,
-                    Photo=studentEditView.ExistsPath
-                };
-                _studentRepository.Update(student);
+                Student student = _studentRepository.GetStudent(studentEditView.Id);
+                student.Email = studentEditView.Email;
+                student.Name = studentEditView.Name;
+                student.Gread = studentEditView.Gread;
+                //后面就是用户是否上传图片，如果上传了就删除原先的然后更新新生成的，没删不用做操作
+                if(studentEditView.Photos.Count>0)
+                {
+                    if(studentEditView.ExistsPath!=null)
+                    {
+                        //旧图片在服务器上的地址
+                        string filePath = Path.Combine(hostingEnvironment.WebRootPath, "img", studentEditView.ExistsPath);
+                        System.IO.File.Delete(filePath);
+                    }
+                }
+                //保存新生成的图片地址
+                student.Photo = ProcessUploadFileImg(studentEditView);              
+              Student student1=  _studentRepository.Update(student);
+                return RedirectToAction("Index");
             }
-            return View("Index");
+            return View(studentEditView);
+        }
+        private string ProcessUploadFileImg(StudentCreateViewModel model)
+        {
+            string uniqueFileName = string.Empty;
+            if (model.Photos != null && model.Photos.Count > 0)
+            {
+                //图片上传的路径
+                string uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "img");
+                foreach (var Photo in model.Photos)
+                {
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
+                    string filePath = Path.Combine(uploadFolder, uniqueFileName);
+                    //将文件拷贝到文件夹中去
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        Photo.CopyTo(stream);
+                    }
+                        
+                    
+                }
+
+
+
+            }
+            return uniqueFileName;
         }
     }
 }
