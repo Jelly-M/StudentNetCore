@@ -39,12 +39,21 @@ namespace WebApplication2
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseStaticFiles(); //当请求是静态文件时，他就不会在传递下一个中间件，就此结束
-            app.UseMvcWithDefaultRoute();
-            app.Run(async (context) =>
+            else
             {
-                await context.Response.WriteAsync("Hello World!");
+                app.UseExceptionHandler("/Error"); //捕获全局异常
+                app.UseStatusCodePagesWithRedirects("/Error/{0}"); //状态码404后的异常跳转 //后面的占位符就是状态码
+            }
+            app.UseStaticFiles(); //当请求是静态文件时，他就不会在传递下一个中间件，就此结束
+                                  //app.UseMvcWithDefaultRoute();
+            app.UseMvc(x => {
+                x.MapRoute(name: "default", template:"{controller=home}/{action=index}/{id?}");
             });
+            //终端中间件
+            //app.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("hello world");
+            //});
         }
     }
 }
